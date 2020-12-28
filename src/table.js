@@ -21,51 +21,40 @@ const renderBody = () =>{
         </tr>
          ))
 }
- let i = 0   
+
+
+let i = 0   
 let count = 0
 const handelLRNavigate = (e)=>{
-  tablec.current.style.backgroundColor = "" 
   if(count <= rows ){
       if(e.target.name == "left"){
         if(count != rows){
               tablec.current.children[i].cells[count].style.backgroundColor = "red"
                 count ++
-                console.log(i , count)
-          
             }else if(i<rows){
               count=0;
               i++
             }
       }else{
+       if(count!=0 || i!=0)
        if(i==0){
           count --
           tablec.current.children[i].cells[count].style.backgroundColor = ""
       }else if(i>rows && count !=0){ 
         i--
         count --
-      
-          tablec.current.children[i].cells[count].style.backgroundColor = ""
-         }
-            console.log(i , tablec.current.children)   
-      }
-     
-  }else {
-    if(count!=0 || i!=0)
-    count --
+        tablec.current.children[i].cells[count].style.backgroundColor = ""
+         }      
+      }   
   }
-
 }
 
 const handelTBNavigate = (e)=>{
-  tablec.current.style.backgroundColor = ""
-
   if(count <= rows ){
       if(e.target.name == "top"){
         if(count != rows){
               tablec.current.children[count].cells[i].style.backgroundColor = "red"
-                count ++
-                
-          
+                count ++        
             }else if(i<rows){
               count=0;
               i++
@@ -76,7 +65,6 @@ const handelTBNavigate = (e)=>{
        tablec.current.children[count].cells[i].style.backgroundColor = ""
       }
     }
-    console.log(i , count)
   }
      
  
@@ -103,16 +91,11 @@ const handelTBNavigate = (e)=>{
                     <Table responsive bordered style={{border:"2px solid black" , width:"30rem" , height:"30rem"}}  >
                         <thead >
                        </thead>
-                       <tbody ref={tablec}>   
-                          
+                       <tbody ref={tablec}>      
                            {renderBody()}
                         </tbody>
-                    </Table>
-
-                    
-                
-                </div>
-        
+                    </Table>       
+                 </div>
      );
     
 }
