@@ -23,16 +23,18 @@ const renderBody = () =>{
 }
 
 
-let i = 0   
+let i = 0 
 let count = 0
 
 const handelLRNavigate = (e)=>{
+  count =count 
+  i=i
   clear()
       if(e.target.name == "left"){
-        if(count != columns){
-              tablec.current.children[i].cells[count].style.backgroundColor = "red"
+           if(count != columns){
+               tablec.current.children[i].cells[count].style.backgroundColor = "red"
                 count ++
-                console.log(i , count)         
+                    
             }else if(i<columns){
               count=0;
               i++
@@ -50,8 +52,10 @@ const handelLRNavigate = (e)=>{
 
 
 const handelTBNavigate = (e)=>{ 
+  count =count 
+  i=i
   clear()
-      if(e.target.name == "top"){  
+      if(e.target.name == "bottom"){  
         if(count != rows){
               tablec.current.children[count].cells[i].style.backgroundColor = "red"
               count ++   
@@ -59,7 +63,7 @@ const handelTBNavigate = (e)=>{
               count=0;
               i++
             }
-      }else{       
+      }else{   
        count--  
        tablec.current.children[count].cells[i].style.backgroundColor = "red"
        if(count == 0 && i!=0){
@@ -89,8 +93,8 @@ return (
     </Form.Group>
                     
     <div style={{position:"relative"}}>
-      <button name="bottom"  onClick={(e)=>{handelTBNavigate(e)}} style={{ top:"-40px" , backgroundImage:" url(top2.png)"}}></button>
-      <button name="top"     onClick={(e)=>{handelTBNavigate(e)}} style={{top:"30px",backgroundImage:" url(bottom.webp)" }}></button>
+      <button name="top"  onClick={(e)=>{handelTBNavigate(e)}} style={{ top:"-40px" , backgroundImage:" url(top2.png)"}}></button>
+      <button name="bottom"     onClick={(e)=>{handelTBNavigate(e)}} style={{top:"30px",backgroundImage:" url(bottom.webp)" }}></button>
       <button name="left"    onClick={(e)=>handelLRNavigate(e)}   style={{left:"40px" , backgroundImage:" url(left.png)"}}> </button>
       <button name="right"   onClick={(e)=>handelLRNavigate(e)}   style={{right:"20px" ,backgroundImage:" url(right.png)"}}> </button>
     </div>
