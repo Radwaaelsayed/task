@@ -26,7 +26,7 @@ let count = 0
 const handelLRNavigate = (e)=>{
   tablec.current.style.backgroundColor = "" 
   if(count <= rows ){
-      if(e.target.name == "left"){
+      if(e.target.name === "left"){
         if(count != rows){
               tablec.current.children[i].cells[count].style.backgroundColor = "red"
                 count ++
@@ -41,10 +41,8 @@ const handelLRNavigate = (e)=>{
        if(i==0){
           count --
           tablec.current.children[i].cells[count].style.backgroundColor = ""
-      }else if(i>rows && count !=0){ 
+      }else if(i>0 && count !==0){ 
         i--
-        count --
-      
           tablec.current.children[i].cells[count].style.backgroundColor = ""
          }
             console.log(i , tablec.current.children)   
@@ -69,17 +67,20 @@ const handelTBNavigate = (e)=>{
               i++
             }
       }else{
-        if(count!=0 || i!=0)
-       count--  
+        if(count>0)
+      { 
+        count--  
+        tablec.current.children[count].cells[i].style.backgroundColor = ""
+      }
+       else if(i>0)
+       i--
+       
        tablec.current.children[count].cells[i].style.backgroundColor = ""
+       console.log(count , i)
       }
     }
-    console.log(i , count)
+    console.log(count, i)
   }
-     
- 
-
-
 
         return (            
                 <div  style={{display:"flex" , justifyContent:"space-evenly" , alignItems:"center" , width:"100%"}}>                   
