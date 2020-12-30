@@ -1,7 +1,7 @@
 import Table from 'react-bootstrap/Table'
 import React , {useRef, useState} from 'react';
 import { Form } from 'react-bootstrap';
-
+import './App.css'
 
 
 
@@ -25,98 +25,83 @@ const renderBody = () =>{
 
 let i = 0   
 let count = 0
+
 const handelLRNavigate = (e)=>{
-  if(count <= rows ){
-      if(e.target.name === "left"){
-        if(count != rows){
+  clear()
+      if(e.target.name == "left"){
+        if(count != columns){
               tablec.current.children[i].cells[count].style.backgroundColor = "red"
                 count ++
-            }else if(i<rows){
+                console.log(i , count)         
+            }else if(i<columns){
               count=0;
               i++
             }
       }else{
-<<<<<<< HEAD
-        if(count!=0 || i!=0)
-
-       if(count!=0 || i!=0)
->>>>>>> ea28fdde63a5f4b26ca49d38f47dc21c07494249
-       if(i==0){
-          count --
-          tablec.current.children[i].cells[count].style.backgroundColor = ""
-      }else if(i>0 && count !==0){ 
-        i--
-<<<<<<< HEAD
-          tablec.current.children[i].cells[count].style.backgroundColor = ""
-         }
-            console.log(i , tablec.current.children)   
-      }
-     
-=======
         count --
-        tablec.current.children[i].cells[count].style.backgroundColor = ""
-         }      
-      }   
->>>>>>> ea28fdde63a5f4b26ca49d38f47dc21c07494249
-  }
-}
-
-const handelTBNavigate = (e)=>{
-  if(count <= rows ){
-      if(e.target.name == "top"){
-        if(count != rows){
-              tablec.current.children[count].cells[i].style.backgroundColor = "red"
-                count ++        
-            }else if(i<rows){
-              count=0;
-              i++
-            }
-      }else{
-        if(count>0)
-      { 
-        count--  
-        tablec.current.children[count].cells[i].style.backgroundColor = ""
-      }
-       else if(i>0)
-       i--
-       
-       tablec.current.children[count].cells[i].style.backgroundColor = ""
-       console.log(count , i)
+        tablec.current.children[i].cells[count].style.backgroundColor = "red"
+        if(count==0  && i!=0)
+        {
+          i--; 
+          count = columns  
+        }
       }
     }
-<<<<<<< HEAD
-    console.log(count, i)
-=======
->>>>>>> ea28fdde63a5f4b26ca49d38f47dc21c07494249
-  }
 
-        return (            
-                <div  style={{display:"flex" , justifyContent:"space-evenly" , alignItems:"center" , width:"100%"}}>                   
-                     <Form.Group style={{display:"flex" ,flexDirection:"column",  alignItems:"center"}}>
-                      <Form.Label>Rows</Form.Label>
-                      <Form.Control type="number" onChange={e=>setRows(e.target.value)} />
-                        <br />
-                      <Form.Label>Columns</Form.Label>
-                      <Form.Control type="number" onChange={e=>setColumns(e.target.value)} />
-                     </Form.Group>
+
+const handelTBNavigate = (e)=>{ 
+  clear()
+      if(e.target.name == "top"){  
+        if(count != rows){
+              tablec.current.children[count].cells[i].style.backgroundColor = "red"
+              count ++   
+            }else if(i<rows){
+              count=0;
+              i++
+            }
+      }else{       
+       count--  
+       tablec.current.children[count].cells[i].style.backgroundColor = "red"
+       if(count == 0 && i!=0){
+         i--
+         count = rows
+       }
+      }
+    }
+
+
+const clear = () =>{
+  for(let i=0 ; i<tablec.current.children.length ; i++){
+    for(let j=0 ; j<tablec.current.children[i].cells.length ; j++){
+      tablec.current.children[i].cells[j].style.backgroundColor = ""
+    }
+  }
+    }
+     
+return (            
+  <div  style={{display:"flex" , justifyContent:"space-evenly" , alignItems:"center" , width:"100%"}}>                   
+    <Form.Group style={{display:"flex" ,flexDirection:"column",  alignItems:"center"}}>
+    <Form.Label>Rows</Form.Label>
+    <Form.Control type="number" onChange={e=>setRows(e.target.value)} />
+     <br/>
+    <Form.Label>Columns</Form.Label>
+    <Form.Control type="number" onChange={e=>setColumns(e.target.value)} />
+    </Form.Group>
                     
-                    <div style={{position:"relative"}}>
-                        <button name="top"  onClick={(e)=>{handelTBNavigate(e)}} style={{position:"absolute" , top:"-40px"}}>T</button>
-                        <button name="bottom" onClick={(e)=>{handelTBNavigate(e)}} style={{position:"absolute" , top:"30px"}}>B</button>
-                        <button name="right" onClick={(e)=>handelLRNavigate(e)} style={{position:"absolute" , left:"40px"}}> R </button>
-                        <button name="left" onClick={(e)=>handelLRNavigate(e)} style={{position:"absolute" , right:"20px"}}>  L</button>
-                    </div>
+    <div style={{position:"relative"}}>
+      <button name="bottom"  onClick={(e)=>{handelTBNavigate(e)}} style={{ top:"-40px" , backgroundImage:" url(top2.png)"}}></button>
+      <button name="top"     onClick={(e)=>{handelTBNavigate(e)}} style={{top:"30px",backgroundImage:" url(bottom.webp)" }}></button>
+      <button name="left"    onClick={(e)=>handelLRNavigate(e)}   style={{left:"40px" , backgroundImage:" url(left.png)"}}> </button>
+      <button name="right"   onClick={(e)=>handelLRNavigate(e)}   style={{right:"20px" ,backgroundImage:" url(right.png)"}}> </button>
+    </div>
                     
-                    <Table responsive bordered style={{border:"2px solid black" , width:"30rem" , height:"30rem"}}  >
-                        <thead >
-                       </thead>
-                       <tbody ref={tablec}>      
-                           {renderBody()}
-                        </tbody>
-                    </Table>       
-                 </div>
-     );
-    
+    <Table responsive bordered style={{border:"2px solid black" , width:"30rem" , height:"30rem"}} >
+      <tbody ref={tablec}>   
+        {renderBody()}
+      </tbody>
+    </Table>
+  </div>       
+     );   
 }
  
 export default TableBody;
