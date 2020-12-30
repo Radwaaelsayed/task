@@ -38,7 +38,7 @@ const handelLRNavigate = (e)=>{
       }else{
 <<<<<<< HEAD
         if(count!=0 || i!=0)
-=======
+
        if(count!=0 || i!=0)
 >>>>>>> ea28fdde63a5f4b26ca49d38f47dc21c07494249
        if(i==0){
