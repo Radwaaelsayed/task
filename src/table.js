@@ -37,6 +37,7 @@ const handelLRNavigate = (e)=>{
               i++
             }
       }else{
+        if(count!=0 || i!=0)
        if(i==0){
           count --
           tablec.current.children[i].cells[count].style.backgroundColor = ""
@@ -49,9 +50,6 @@ const handelLRNavigate = (e)=>{
             console.log(i , tablec.current.children)   
       }
      
-  }else {
-    if(count!=0 || i!=0)
-    count --
   }
 
 }
