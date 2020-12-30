@@ -31,6 +31,11 @@ const handelLRNavigate = (e)=>{
   i=i
   clear()
       if(e.target.name == "left"){
+        if(i>=columns || i==count && i==rows ){
+          count=0
+          i=0
+          
+            }
            if(count != columns){
                tablec.current.children[i].cells[count].style.backgroundColor = "red"
                 count ++
@@ -40,14 +45,19 @@ const handelLRNavigate = (e)=>{
               i++
             }
       }else{
-        count --
-        tablec.current.children[i].cells[count].style.backgroundColor = "red"
+        
         if(count==0  && i!=0)
         {
           i--; 
           count = columns  
+        }else if(count ==0 && i == 0  ||count ==0 && i == columns  ) {
+          i=  +rows-1
+         count = +columns
         }
+        count --
+        tablec.current.children[i].cells[count].style.backgroundColor = "red"
       }
+      console.log(count , i)
     }
 
 
@@ -56,21 +66,29 @@ const handelTBNavigate = (e)=>{
   i=i
   clear()
       if(e.target.name == "bottom"){  
-        if(count != rows){
+        if(i>=columns || i==count && i==rows) {
+          tablec.current.children[0].cells[0].style.backgroundColor = "red"
+          count=0
+          i=0
+        }else if(count != rows){
               tablec.current.children[count].cells[i].style.backgroundColor = "red"
-              count ++   
-            }else if(i<rows){
-              count=0;
-              i++
-            }
+              count ++  
+        }else if(i<rows){
+          count=0;
+          i++
+        }
       }else{   
-       count--  
-       tablec.current.children[count].cells[i].style.backgroundColor = "red"
        if(count == 0 && i!=0){
          i--
          count = rows
+       }else if(count ==0 && i == 0 ) {
+         i=+columns-1
+        count =+rows
        }
+       count--  
+       tablec.current.children[count].cells[i].style.backgroundColor = "red"
       }
+      console.log(count , i)
     }
 
 
